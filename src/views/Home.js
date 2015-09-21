@@ -1,54 +1,39 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import CounterButton from '../components/CounterButton';
-import GithubButton from '../components/GithubButton';
+import SortGames from '../components/SortGames';
+import Banner from '../components/Banner';
+import GameList from '../components/GameList';
 
 export default class Home extends Component {
   render() {
     const styles = require('./Home.scss');
     // require the logo image both from client and server
-    const logoImage = require('./logo.png');
+    const commercialImg1 = require('./commercial_img_1.png');
+    const commercialImg2 = require('./commercial_img_2.jpg');
+    const commercialImg3 = require('./commercial_img_3.jpg');
+
     return (
-      <div className={styles.home}>
-        <div className={styles.masthead}>
-          <div className="container">
-            <div className={styles.logo}>
-              <p>
-                <img src={logoImage}/>
-              </p>
-            </div>
-            <h1>Gamers Online Webshop</h1>
-
-            <h2>Webshop for PS4, PS3, PSVita and PSP games!</h2>
-
-            <p>
-              <a className={styles.github} href="https://github.com/kennyomg/gamersonline-uni"
-                 target="_blank">
-                <i className="fa fa-github"/> View on Github
-              </a>
-            </p>
-            <GithubButton user="kennyomg"
-                          repo="gamersonline-uni"
-                          type="star"
-                          width={160}
-                          height={30}
-                          count large/>
-            <GithubButton user="kennyomg"
-                          repo="gamersonline-uni"
-                          type="fork"
-                          width={160}
-                          height={30}
-                          count large/>
-
-            <p className={styles.humility}>
-              Created by <a href="https://twitter.com/kennyomg" target="_blank">@kennyomg</a>.
-            </p>
-          </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12"><h1>Games</h1></div>
         </div>
-
-        <div className="container">
-          <div className={styles.counterContainer}>
-            <CounterButton/>
+        <div className="row">
+          <div className="col-lg-2">
+            <SortGames />
+          </div>
+          <div className="col-lg-10">
+            <Banner />
+            <div className="row">
+              <div className="col-lg-9">
+                <div className="row">
+                  <div className="col-lg-6"><img src={commercialImg1} /></div><div className="col-lg-6"><img src={commercialImg2} /></div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-12"><GameList /></div>
+                </div>
+              </div>
+              <div className="col-lg-3"><img src={commercialImg3} /></div>
+            </div>
           </div>
         </div>
       </div>
