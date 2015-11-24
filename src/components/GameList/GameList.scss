@@ -1,0 +1,14 @@
+.gameTile {
+  float:left;
+  width: 200px;
+  height: 300px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  margin: 10px;
+}
+
+.gameTile:hover {
+  border: 1px solid #ccc;
+  cursor: pointer;
+}

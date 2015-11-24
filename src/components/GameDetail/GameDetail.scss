@@ -1,0 +1,15 @@
+.gameDetailPage {
+  margin-top: 20px;
+
+  .back-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+  }
+  .back-button:hover {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+}
