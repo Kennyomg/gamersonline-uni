@@ -1,3 +1,5 @@
+import { setCookie, getCookie } from 'utils/cookie';
+
 const GET_CART = 'redux-example/cart/GET_CART';
 const GET_CART_SUCCESS = 'redux-example/cart/GET_CART_SUCCESS';
 const GET_CART_FAIL = 'redux-example/cart/GET_CART_FAIL';
@@ -58,6 +60,9 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case CHECKOUT_SUCCESS:
+      action.result.cookieNames.map((name) => {
+        setCookie(name, parseInt(getCookie(name), 10) - 1);
+      });
       return {
         ...state,
         loading: false,

@@ -5,7 +5,8 @@ export default function getGame(req) {
     db.Product.findOne({
       where: {
         id: req.body.gameId,
-      }
+      },
+      include: [ db.SpecialEdition ]
     }).then(game => {
       resolve(game);
     });

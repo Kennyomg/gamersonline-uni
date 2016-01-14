@@ -9,6 +9,7 @@ export default (sequelize, DataTypes) => {
       associate: models => {
         Product.belongsToMany(models.Cart, {through: 'ProductCart'});
         Product.belongsToMany(models.Platform, {through: 'ProductPlatform'});
+        Product.belongsTo(models.SpecialEdition);
       }
     }
   });

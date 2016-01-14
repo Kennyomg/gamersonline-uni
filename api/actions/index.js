@@ -1,5 +1,6 @@
 export addItemToCart from './addItemToCart';
 export removeItemFromCart from './removeItemFromCart';
+export addSpecialEdition from './addSpecialEdition';
 export createGame from './createGame';
 export checkout from './checkout';
 export updateGame from './updateGame';

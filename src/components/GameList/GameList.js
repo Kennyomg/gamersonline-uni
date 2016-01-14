@@ -27,9 +27,9 @@ class GameList extends Component {
         <div>
           <h4><b>Laatste Releases</b> | <Link to="/">alles weergeven</Link></h4>
           {
-            (games) ? games.map(({id, name, price, releasedate}) => {
+            (games) ? games.map(({id, name, price, releasedate, SpecialEdition}) => {
               return (
-                <GameTile data-gameid={id} onClick={::this.loadDetail} onButton={::this.addItem} id={id} name={name} price={price} releasedate={releasedate} />
+                <GameTile data-gameid={id} onClick={::this.loadDetail} onButton={::this.addItem} id={id} name={name} price={price} releasedate={releasedate} specialEdition={SpecialEdition} />
               );
             })
             : ''

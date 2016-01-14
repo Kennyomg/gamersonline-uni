@@ -49,3 +49,7 @@ input, select, textarea{
 textarea:focus, input:focus {
     color: #ff0000;
 }
+
+:global(.table-striped) > tbody > tr:nth-of-type(odd) {
+    background-color: #2f2f2f;
+}

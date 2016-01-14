@@ -20,14 +20,14 @@ const dest = document.getElementById('content');
 const store = createStore(reduxReactRouter, makeRouteHooksSafe(getRoutes), createHistory, client, window.__data);
 
 function initSocket() {
-  const socket = io('', {path: '/api/ws', transports: ['polling']});
-  socket.on('news', (data) => {
-    console.log(data);
-    socket.emit('my other event', { my: 'data from client' });
-  });
-  socket.on('msg', (data) => {
-    console.log(data);
-  });
+  const socket = io();
+  // socket.on('news', (data) => {
+  //   console.log(data);
+  //   socket.emit('my other event', { my: 'data from client' });
+  // });
+  // socket.on('msg', (data) => {
+  //   console.log(data);
+  // });
 
   return socket;
 }

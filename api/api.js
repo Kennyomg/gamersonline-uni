@@ -44,7 +44,8 @@ app.use(session({
   saveUninitialized: false,
   cookie: { maxAge: 60000 }
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 
 app.use((req, res) => {

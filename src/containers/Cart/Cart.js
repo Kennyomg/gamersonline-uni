@@ -42,6 +42,8 @@ class Cart extends Component {
   render() {
     // require the logo image both from client and server
     const { cart, user } = this.props;
+    let payNow = false;
+
     return (
       <div className="container">
         <h1>Winkelwagen</h1>
@@ -50,13 +52,25 @@ class Cart extends Component {
           <div>
             <div className="row">
               {
-                cart.map(({id, name, price, releasedate}) => (
-                  <GameTile onClick={()=>{}} onButton={::this.removeItem} id={id} name={name} price={price} releasedate={releasedate} />
-                ))
+                cart.map(({id, name, price, releasedate, SpecialEdition}) => {
+                  if (SpecialEdition) {
+                    payNow = true;
+                  }
+                  return <GameTile onClick={()=>{}} onButton={::this.removeItem} id={id} name={name} price={price} releasedate={releasedate} specialEdition={SpecialEdition} deleteItem />;
+                })
               }
             </div>
             <div className="row">
-              <button type="button" className="btn btn-primary" onClick={::this.checkout} style={{float: 'right'}}>Bestel</button>
+              {
+                (payNow) ? (
+                  <div>
+                    <span>U kunt geen pre-order plaatsen voor speciale edities.</span>
+                    <button type="button" className="btn btn-primary" onClick={::this.checkout} style={{float: 'right'}}>Betaal Direct</button>
+                  </div>
+                ) : (
+                  <button type="button" className="btn btn-primary" onClick={::this.checkout} style={{float: 'right'}}>Bestel</button>
+                )
+            }
             </div>
           </div>
         ) : (

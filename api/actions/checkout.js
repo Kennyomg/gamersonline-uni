@@ -12,15 +12,22 @@ export default function checkout(req, res) {
           UserId: req.body.userId,
         }
       }).then( (cart) => { // Disable-eslint-line
-        cart.setProducts(null).then( (products) => {
+        cart.getProducts({ include: [ db.SpecialEdition ]}).then((products) => {
           let price = 0;
+          const cookieNames = [];
           products.map(product => {
-            price += product.price;
+            if (product.SpecialEditionId) {
+              price += product.SpecialEdition.price;
+              cookieNames.push(`${product.name}${product.id}`);
+            } else {
+              price += parseInt(product.price, 10);
+            }
           });
           res.mailer.send('checkout', {
             to: user.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-            subject: 'Order', // REQUIRED.
+            subject: `Order ${parseInt(cart.id, 10) + parseInt(products[0].price, 10) + parseInt(products[0].id, 10)}`, // REQUIRED.
             price: price,
+            body: (cookieNames.length > 0) ? 'Betaal naar INBAN: NL20INGB0005274592 met uw order nummer als kenmerk. Nadat u dit gedaan heeft zal u een mail ontvangen met de barcode voor uw product' : 'In de bijgeleverde pdf staat een barcode waarmee u in de winkel uw producten kunt ophalen'
           }, (err) => {
             if (err) {
               // handle error
@@ -28,7 +35,7 @@ export default function checkout(req, res) {
               reject(err);
             }
             cart.removeProducts().then( () => {
-              resolve('Email Sent');
+              resolve({ message: 'Email Sent', cookieNames});
             });
           });
         });

@@ -7,7 +7,7 @@ export default function getCart(req) {
         UserId: req.body.id,
       }
     }).then(cart => {
-      cart.getProducts().then((products) => {
+      cart.getProducts({include: [ db.SpecialEdition ]}).then((products) => {
         resolve(products);
       });
     });

@@ -7,6 +7,10 @@ const UPDATE_GAME_FAIL = 'redux-example/admin/UPDATE_GAME_FAIL';
 const DELETE_GAME = 'redux-example/admin/DELETE_GAME';
 const DELETE_GAME_SUCCESS = 'redux-example/admin/DELETE_GAME_SUCCESS';
 const DELETE_GAME_FAIL = 'redux-example/admin/DELETE_GAME_FAIL';
+const OPEN_SPECIAL_CHECKBOX = 'redux-example/admin/OPEN_SPECIAL_CHECKBOX';
+const ADD_SPECIAL_EDITION = 'redux-example/admin/ADD_SPECIAL_EDITION';
+const ADD_SPECIAL_EDITION_SUCCESS = 'redux-example/admin/ADD_SPECIAL_EDITION_SUCCESS';
+const ADD_SPECIAL_EDITION_FAIL = 'redux-example/admin/ADD_SPECIAL_EDITION_FAIL';
 
 const initialState = {
   game: {},
@@ -31,6 +35,23 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         creating: false,
         user: null,
+        createError: action.error
+      };
+    case ADD_SPECIAL_EDITION:
+      return {
+        ...state,
+        creating: true
+      };
+    case ADD_SPECIAL_EDITION_SUCCESS:
+      return {
+        ...state,
+        creating: false,
+        game: action.result
+      };
+    case ADD_SPECIAL_EDITION_FAIL:
+      return {
+        ...state,
+        creating: false,
         createError: action.error
       };
     case UPDATE_GAME:
@@ -67,20 +88,43 @@ export default function reducer(state = initialState, action = {}) {
         deleting: false,
         deleteError: action.error
       };
+    case OPEN_SPECIAL_CHECKBOX:
+      return {
+        ...state,
+        openedCheckboxes: [
+          ...state.openedCheckboxes,
+          action.gameid
+        ]
+      };
     default:
       return state;
   }
 }
 
-export function createGame(name, description, price, releasedate) {
+export function createGame(name, description, price, releasedate, imgData) {
   return {
     types: [CREATE_GAME, CREATE_GAME_SUCCESS, CREATE_GAME_FAIL],
     promise: (client) => client.post('/createGame', {
       data: {
-        name: name,
-        description: description,
-        price: price,
-        releasedate: releasedate,
+        name,
+        description,
+        price,
+        releasedate,
+        imgData,
+      }
+    })
+  };
+}
+
+export function addSpecialEdition(gameId, amount, price, imgData) {
+  return {
+    types: [ADD_SPECIAL_EDITION, ADD_SPECIAL_EDITION_SUCCESS, ADD_SPECIAL_EDITION_FAIL],
+    promise: (client) => client.post('/addSpecialEdition', {
+      data: {
+        gameId,
+        amount,
+        price,
+        imgData,
       }
     })
   };
@@ -108,5 +152,12 @@ export function deleteGame(id) {
         id: id,
       }
     })
+  };
+}
+
+export function openSpecialCheckbox(id) {
+  return {
+    type: OPEN_SPECIAL_CHECKBOX,
+    gameid: id,
   };
 }
