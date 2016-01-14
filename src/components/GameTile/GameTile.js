@@ -26,7 +26,7 @@ class GameTile extends Component {
         </div>
         <div className={styles.footer}>
           <small data-gameid={id}>&euro;{price}</small>
-          <button type="button" data-gameid={id} className="btn btn-primary" onClick={ev => onButton(ev)}>+<div className="glyphicon glyphicon-shopping-cart"></div></button>
+          <button type="button" data-gameid={id} className="btn btn-primary" onClick={() => onButton(id)}>+<div className="glyphicon glyphicon-shopping-cart"></div></button>
         </div>
       </div>
     );

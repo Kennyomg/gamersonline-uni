@@ -16,9 +16,9 @@ class GameList extends Component {
     this.props.getGame(ev.target.dataset.gameid);
   }
 
-  addItem(ev) {
-    console.log(ev.target.dataset.gameid);
-    this.props.addItemToCart(this.props.user.id, ev.target.dataset.gameid);
+  addItem(gameid) {
+    console.log(gameid);
+    this.props.addItemToCart(this.props.user.id, gameid);
   }
 
   render() {
@@ -29,7 +29,7 @@ class GameList extends Component {
           {
             (games) ? games.map(({id, name, price, releasedate}) => {
               return (
-                <GameTile onClick={::this.loadDetail} onButton={::this.addItem} id={id} name={name} price={price} releasedate={releasedate} />
+                <GameTile data-gameid={id} onClick={::this.loadDetail} onButton={::this.addItem} id={id} name={name} price={price} releasedate={releasedate} />
               );
             })
             : ''

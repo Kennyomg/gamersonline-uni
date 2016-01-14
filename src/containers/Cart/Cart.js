@@ -18,6 +18,7 @@ class Cart extends Component {
     user: PropTypes.object,
     cart: PropTypes.array,
     getCart: PropTypes.func,
+    removeItem: PropTypes.func,
   }
 
   static defaultProps = {
@@ -27,6 +28,10 @@ class Cart extends Component {
 
   componentDidMount() {
     if (this.props.user) this.props.getCart(this.props.user.id);
+  }
+
+  removeItem(gameid) {
+    this.props.removeItem(this.props.user.id, gameid);
   }
 
   render() {
@@ -40,7 +45,7 @@ class Cart extends Component {
           <div className="row">
             {
               cart.map(({id, name, price, releasedate}) => (
-                <GameTile onClick={()=>{}} onButton={()=>{}} id={id} name={name} price={price} releasedate={releasedate} />
+                <GameTile onClick={()=>{}} onButton={::this.removeItem} id={id} name={name} price={price} releasedate={releasedate} />
               ))
             }
           </div>
