@@ -1,6 +1,9 @@
+import moment from 'moment-timezone';
+
 const LOAD = 'redux-example/LOAD';
 const LOAD_SUCCESS = 'redux-example/LOAD_SUCCESS';
 const LOAD_FAIL = 'redux-example/LOAD_FAIL';
+const UPDATE_TIME = 'redux-example/UPDATE_TIME';
 
 const initialState = {
   loaded: false
@@ -27,6 +30,11 @@ export default function info(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case UPDATE_TIME:
+      return {
+        ...state,
+        ...action
+      };
     default:
       return state;
   }
@@ -40,5 +48,12 @@ export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get('/loadInfo')
+  };
+}
+
+export function updateTime() {
+  return {
+    type: UPDATE_TIME,
+    time: moment()
   };
 }

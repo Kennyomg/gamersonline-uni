@@ -2,6 +2,7 @@ export addItemToCart from './addItemToCart';
 export createGame from './createGame';
 export updateGame from './updateGame';
 export deleteGame from './deleteGame';
+export getCart from './getCart';
 export getGame from './getGame';
 export getGameList from './getGameList';
 export loadInfo from './loadInfo';

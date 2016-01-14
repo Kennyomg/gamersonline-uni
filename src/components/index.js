@@ -14,4 +14,5 @@ export WidgetForm from './WidgetForm/WidgetForm';
 export SortGames from './SortGames/SortGames';
 export Banner from './Banner/Banner';
 export GameList from './GameList/GameList';
+export GameTile from './GameTile/GameTile';
 export GameDetail from './GameDetail/GameDetail';

@@ -99,7 +99,7 @@ export function addItemToCart(user, id) {
     types: [ADD_ITEM_TO_CART, ADD_ITEM_TO_CART_SUCCESS, ADD_ITEM_TO_CART_FAIL],
     promise: (client) => client.post('/addItemToCart', {
       data: {
-        user: user,
+        user_id: user,
         id: id,
       }
     })

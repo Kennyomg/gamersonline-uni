@@ -2,22 +2,18 @@ import db from '../models/index';
 
 export default function addItemToCart(req) {
   return new Promise((resolve) => {
-    console.log(req.session);
+    console.log(req.body);
     db.Cart.findOrCreate({
       where: {
-        UserId: req.body.user.id,
+        UserId: req.body.user_id,
       }
-    }).then( () => { // Disable-eslint-line
-      db.Cart.findOne({
+    }).spread( (cart) => { // Disable-eslint-line
+      db.Product.findOne({
         where: {
-          UserId: req.body.user.id,
+          id: req.body.id,
         }
-      }).then( (cart) => {
-        cart.addProduct(db.Product.findOne({
-          where: {
-            id: req.body.id,
-          }
-        })).then( updatedCart => {
+      }).then( (product) => {
+        cart.addProduct(product).then( updatedCart => {
           return resolve(updatedCart);
         });
       });

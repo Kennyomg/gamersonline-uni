@@ -1,10 +1,24 @@
 body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
+  color: white;
+  background: red; /* For browsers that do not support gradients */
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-linear-gradient(left,black,indigo,black);
+  /* For Opera 11.1 to 12.0 */
+  background: -o-linear-gradient(left,black,indigo,black);
+  /* For Fx 3.6 to 15 */
+  background: -moz-linear-gradient(left,black,indigo,black);
+  /* Standard syntax */
+  background: linear-gradient(to right, black,indigo,black);
 }
 .app {
   :global(.navbar-brand) {
     position:relative;
     padding-left: 50px;
+  }
+  :global(.navbar) {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
   }
   .brand {
     position:absolute;
@@ -26,4 +40,12 @@ body {
 }
 .appContent {
   margin: 50px 0; // for fixed navbar
+}
+
+input, select, textarea{
+    color: #ff0000;
+}
+
+textarea:focus, input:focus {
+    color: #ff0000;
 }

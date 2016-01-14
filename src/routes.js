@@ -10,6 +10,7 @@ import {
     Login,
     LoginSuccess,
     Survey,
+    Cart,
     Admin,
     NotFound,
   } from 'containers';
@@ -43,6 +44,7 @@ export default (store) => {
         <Route path="chat" component={Chat}/>
         <Route path="loginSuccess" component={LoginSuccess}/>
       </Route>
+      <Route path="cart" component={Cart} />
       <Route path="survey" component={Survey}/>
       <Route path="*" component={NotFound} status={404} />
     </Route>

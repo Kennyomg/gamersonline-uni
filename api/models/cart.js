@@ -3,6 +3,7 @@ export default (sequelize, DataTypes) => {
     classMethods: {
       associate: models => {
         Cart.belongsTo(models.User);
+        Cart.belongsToMany(models.Product, {through: 'ProductCart'});
       }
     }
   });

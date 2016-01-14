@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import moment from 'moment-timezone';
+import { GameTile } from 'components';
 
 export default
 class GameList extends Component {
@@ -17,33 +17,26 @@ class GameList extends Component {
   }
 
   addItem(ev) {
-    this.props.addItemToCart(this.props.user, ev.target.dataset.gameid);
+    console.log(ev.target.dataset.gameid);
+    this.props.addItemToCart(this.props.user.id, ev.target.dataset.gameid);
   }
 
   render() {
-    const styles = require('./GameList.scss');
-
     const {games} = this.props;
     return (
         <div>
-          <span><b>Laatste Releases</b> | <Link to="/">alles weergeven</Link></span><br />
+          <h4><b>Laatste Releases</b> | <Link to="/">alles weergeven</Link></h4>
           {
             (games) ? games.map(({id, name, price, releasedate}) => {
-              const parsedTime = moment(releasedate).format('LL');
               return (
-                <div onClick={::this.loadDetail} data-gameid={id} className={styles.gameTile}>
-                  <h3 data-gameid={id}>{name}</h3>
-                  <small data-gameid={id}>&euro;{price}</small><br/>
-                  <small data-gameid={id}>{parsedTime}</small>
-                  <button type="button" data-gameid={id} className="btn btn-primary" onClick={::this.addItem}>+<div className="glyphicon glyphicon-shopping-cart"></div></button>
-                </div>
+                <GameTile onClick={::this.loadDetail} onButton={::this.addItem} id={id} name={name} price={price} releasedate={releasedate} />
               );
             })
             : ''
           }
-          <span><b>Verwacht</b> | <Link to="/">alles weergeven</Link></span><br />
-          <span><b>Deals en aanbiedingen</b> | <Link to="/">alles weergeven</Link></span><br />
-          <span><b>Meest gekocht</b> | <Link to="/">alles weergeven</Link></span>
+          <h4><b>Verwacht</b> | <Link to="/">alles weergeven</Link></h4>
+          <h4><b>Deals en aanbiedingen</b> | <Link to="/">alles weergeven</Link></h4>
+          <h4><b>Meest gekocht</b> | <Link to="/">alles weergeven</Link></h4>
         </div>
     );
   }

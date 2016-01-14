@@ -49,7 +49,7 @@ const NavbarLink = ({to, className, component, children}) => {
 @connect(
   state => ({user: state.auth.user}),
   {logout, pushState})
-export default class App extends Component {
+export default class App extends Component {  //eslint-disable-line
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
@@ -103,19 +103,12 @@ export default class App extends Component {
             <ul className="nav navbar-nav">
               {user && user.role === 'admin' && <li><NavbarLink to="/admin">Admin</NavbarLink></li>}
               {user && <li><NavbarLink to="/chat">Chat</NavbarLink></li>}
-
-              <li><NavbarLink to="/widgets">Speciaal voor jou</NavbarLink></li>
-              <li><NavbarLink to="/survey">Playstation Plus</NavbarLink></li>
-              <li><NavbarLink to="/about">Nieuwe releases</NavbarLink></li>
-              <li><NavbarLink to="/about">Deals en aanbiedingen</NavbarLink></li>
-              <li><NavbarLink to="/about">Collecties</NavbarLink></li>
               {!user && <li><NavbarLink to="/login">Login</NavbarLink></li>}
               {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a href="https://github.com/Kennyomg/gamersonline-uni"
-                   target="_blank" title="View on Github"><i className="fa fa-github"/></a>
+                <NavbarLink to="/cart">Cart</NavbarLink>
               </li>
             </ul>
           </div>
