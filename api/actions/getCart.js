@@ -8,7 +8,7 @@ export default function getCart(req) {
       }
     }).then(cart => {
       cart.getProducts().then((products) => {
-        return resolve(products);
+        resolve(products);
       });
     });
   });

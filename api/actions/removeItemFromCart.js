@@ -2,7 +2,6 @@ import db from '../models/index';
 
 export default function removeItemFromCart(req) {
   return new Promise((resolve, reject) => {
-    console.log(req.body);
     db.Cart.findOrCreate({
       where: {
         UserId: req.body.userId,
@@ -15,10 +14,10 @@ export default function removeItemFromCart(req) {
       }).then( (product) => {
         cart.removeProduct(product).then( () => {
           cart.getProducts().then( updatedCart => {
-            return resolve(updatedCart);
+            resolve(updatedCart);
           });
         }).catch( reason => {
-          return reject(reason);
+          reject(reason);
         });
       });
     });

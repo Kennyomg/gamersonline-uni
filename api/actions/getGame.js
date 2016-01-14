@@ -7,7 +7,7 @@ export default function getGame(req) {
         id: req.body.gameId,
       }
     }).then(game => {
-      return resolve(game);
+      resolve(game);
     });
   });
 }

@@ -15,7 +15,7 @@ export default function createGame(req) {
         price: createdGame.price,
         releasedate: createdGame.releasedate,
       };
-      return resolve(game);
+      resolve(game);
     });
   });
 }

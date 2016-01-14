@@ -4,6 +4,9 @@ const GET_CART_FAIL = 'redux-example/cart/GET_CART_FAIL';
 const REMOVE_ITEM_FROM_CART = 'redux-example/cart/REMOVE_ITEM_FROM_CART';
 const REMOVE_ITEM_FROM_CART_SUCCESS = 'redux-example/cart/REMOVE_ITEM_FROM_CART_SUCCESS';
 const REMOVE_ITEM_FROM_CART_FAIL = 'redux-example/cart/REMOVE_ITEM_FROM_CART_FAIL';
+const CHECKOUT = 'redux-example/cart/CHECKOUT';
+const CHECKOUT_SUCCESS = 'redux-example/cart/CHECKOUT_SUCCESS';
+const CHECKOUT_FAIL = 'redux-example/cart/CHECKOUT_FAIL';
 
 const initialState = {
   loaded: false
@@ -49,6 +52,25 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case CHECKOUT:
+      return {
+        ...state,
+        loading: true
+      };
+    case CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        cart: [],
+      };
+    case CHECKOUT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      };
     default:
       return state;
   }
@@ -72,6 +94,17 @@ export function removeItem(userId, gameId) {
       data: {
         userId,
         gameId,
+      }
+    })
+  };
+}
+
+export function checkout(userId) {
+  return {
+    types: [CHECKOUT, CHECKOUT_SUCCESS, CHECKOUT_FAIL],
+    promise: (client) => client.post('/checkout', {
+      data: {
+        userId,
       }
     })
   };

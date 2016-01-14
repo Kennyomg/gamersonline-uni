@@ -22,10 +22,10 @@ class Admin extends Component {
     const inputReleasedate = this.refs.releasedate;
 
     this.props.createGame(inputName.value, inputDescription.value, inputPrice.value, inputReleasedate.value);
-    inputName.value = '';
-    inputDescription.value = '';
-    inputPrice.value = '';
-    inputReleasedate.value = '';
+    this.refs.name.value = '';
+    this.refs.description.value = '';
+    this.refs.price.value = '';
+    this.refs.releasedate.value = '';
   }
 
   render() {
@@ -36,12 +36,12 @@ class Admin extends Component {
         <h1>Admin Page!</h1>
 
         <div>
-          <form className="create-game-form" onSubmit={::this.handleSubmit}>
+          <form className="create-game-form">
             <input type="text" ref="name" placeholder="Name"/>
             <input type="text" ref="description" placeholder="Description"/>
             <input type="text" ref="price" placeholder="price"/>
             <input type="text" ref="releasedate" placeholder="releasedate"/>
-            <button className="btn btn-success" onClick={::this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Create Game
+            <button type="button" className="btn btn-success" onClick={::this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Create Game
             </button>
           </form>
         </div>

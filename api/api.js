@@ -1,7 +1,7 @@
 require('../server.babel'); // babel registration (runtime transpilation for node)
-
 import express from 'express';
 import session from 'express-session';
+import mailer from 'express-mailer';
 import bodyParser from 'body-parser';
 import config from './config.js';
 import * as actions from './actions/index';
@@ -12,6 +12,21 @@ import db from './models/index';
 
 const pretty = new PrettyError();
 const app = express();
+
+mailer.extend(app, {
+  from: 'order@gamersonline.nl',
+  host: 'smtp.gmail.com', // hostname
+  secureConnection: true, // use SSL
+  port: 465, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: 'kenrickhalff@gmail.com',
+    pass: 'ye2gozp6'
+  }
+});
+
+app.set('views', __dirname + '/templates');
+app.set('view engine', 'jade');
 
 const server = new http.Server(app);
 
@@ -56,7 +71,7 @@ app.use((req, res) => {
   }
 
   if (action && typeof action === 'function') {
-    action(req, params)
+    action(req, res, params)
       .then((result) => {
         res.json(result);
       }, (reason) => {

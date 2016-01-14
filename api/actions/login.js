@@ -8,7 +8,7 @@ export default function login(req) {
         password: req.body.password,
       }
     }).then(user => {
-      return resolve(user);
+      resolve(user);
     });
   });
 }

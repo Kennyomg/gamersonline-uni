@@ -28,8 +28,8 @@ class Home extends Component {
     user: {}
   }
 
-  componentWillMount() {
-    if (!this.props.games) this.props.getGameList();
+  componentDidMount() {
+    this.props.getGameList();
   }
 
   render() {

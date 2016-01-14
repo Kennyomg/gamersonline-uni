@@ -19,6 +19,7 @@ class Cart extends Component {
     cart: PropTypes.array,
     getCart: PropTypes.func,
     removeItem: PropTypes.func,
+    checkout: PropTypes.func,
   }
 
   static defaultProps = {
@@ -34,20 +35,29 @@ class Cart extends Component {
     this.props.removeItem(this.props.user.id, gameid);
   }
 
+  checkout() {
+    this.props.checkout(this.props.user.id);
+  }
+
   render() {
     // require the logo image both from client and server
     const { cart, user } = this.props;
     return (
       <div className="container">
-        <h1>Shopping Cart</h1>
+        <h1>Winkelwagen</h1>
         {
         (user) ? (
-          <div className="row">
-            {
-              cart.map(({id, name, price, releasedate}) => (
-                <GameTile onClick={()=>{}} onButton={::this.removeItem} id={id} name={name} price={price} releasedate={releasedate} />
-              ))
-            }
+          <div>
+            <div className="row">
+              {
+                cart.map(({id, name, price, releasedate}) => (
+                  <GameTile onClick={()=>{}} onButton={::this.removeItem} id={id} name={name} price={price} releasedate={releasedate} />
+                ))
+              }
+            </div>
+            <div className="row">
+              <button type="button" className="btn btn-primary" onClick={::this.checkout} style={{float: 'right'}}>Bestel</button>
+            </div>
           </div>
         ) : (
           <div className="row">

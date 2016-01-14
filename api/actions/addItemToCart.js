@@ -2,7 +2,6 @@ import db from '../models/index';
 
 export default function addItemToCart(req) {
   return new Promise((resolve) => {
-    console.log(req.body);
     db.Cart.findOrCreate({
       where: {
         UserId: req.body.user_id,
@@ -14,7 +13,7 @@ export default function addItemToCart(req) {
         }
       }).then( (product) => {
         cart.addProduct(product).then( updatedCart => {
-          return resolve(updatedCart);
+          resolve(updatedCart);
         });
       });
     });
